@@ -25,8 +25,15 @@ module SRL16E
     // Data in
     input  wire D,
     // Data out
+`ifdef FAST_IQ
     output wire Q
+`else
+    output wire Q /* verilator public_flat_rd */
+`endif
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 0;
+`endif
     
     wire  [3:0] _w_addr = { A3, A2, A1, A0 };
     
@@ -59,7 +66,13 @@ module SRL16E
     endgenerate
     
     // Data out
+`ifdef FAST_IQ
+    reg Q_f /* verilator public_flat_rw */ = 1'b0;
+    reg Q_v /* verilator public_flat_rw */ = 1'b0;
+    assign Q = Q_f ? Q_v : _r_srl[_w_addr];
+`else
     assign Q = _r_srl[_w_addr];
+`endif
 
 endmodule
 /* verilator coverage_on */

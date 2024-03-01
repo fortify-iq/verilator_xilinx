@@ -24,8 +24,15 @@ module LDPE
     // Data in
     input   wire D,
     // Data out
+`ifdef FAST_IQ
     output  wire Q
+`else
+    output  wire Q /* verilator public_flat_rd */
+`endif
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 0;
+`endif
     reg _r_Q;
 
     initial begin : INIT_STATE
@@ -42,7 +49,13 @@ module LDPE
         end
     end
     
+`ifdef FAST_IQ
+    reg Q_f /* verilator public_flat_rw */ = 1'b0;
+    reg Q_v /* verilator public_flat_rw */ = 1'b0;
+    assign Q = Q_f ? Q_v : _r_Q;
+`else
     assign Q = _r_Q;
+`endif
 
 endmodule
 /* verilator coverage_on */

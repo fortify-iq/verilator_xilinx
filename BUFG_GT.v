@@ -19,8 +19,15 @@ module BUFG_GT
     input       CLR,
     input       CLRMASK,
     
+`ifdef FAST_IQ
     output      O /* verilator clocker */
+`else
+    output      O /* verilator clocker */ /* verilator public_flat_rd */
+`endif
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 1;
+`endif
 
     reg  [1:0] r_CE_cdc;
     wire       w_CE_msk;
@@ -103,7 +110,13 @@ module BUFG_GT
         end
     end
     
+`ifdef FAST_IQ
+    reg O_f /* verilator public_flat_rw */ = 1'b0;
+    reg O_v /* verilator public_flat_rw */ = 1'b0;
+    assign O = O_f ? O_v : r_O;
+`else
     assign O = r_O;
+`endif
 
 endmodule
 /* verilator coverage_on */
