@@ -62,7 +62,7 @@ module SRL32E
     endgenerate
     
     // Data out
-    `ifdef FAST_IQ
+`ifdef FAST_IQ
     reg Q_f /* verilator public_flat_rw */ = 1'b0;
     reg Q_v /* verilator public_flat_rw */ = 1'b0;
     assign Q   = Q_f ? Q_v : _r_srl[A];

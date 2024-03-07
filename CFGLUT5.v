@@ -24,22 +24,16 @@ module CFGLUT5
     input  wire I0, I1, I2, I3, I4,
     // LUT configuration data input
     input  wire CDI,
+`ifdef FAST_IQ
     // LUT configuration data output
-`ifdef FAST_IQ
     output wire CDO,
-`else
-    output wire CDO /* verilator public_flat_rd */,
-`endif
     // LUT4 output
-`ifdef FAST_IQ
     output wire O5,
-`else`
-    output wire O5 /* verilator public_flat_rd */,
-`endif
     // LUT5 output
-`ifdef FAST_IQ
     output wire O6
 `else
+    output wire CDO /* verilator public_flat_rd */,
+    output wire O5 /* verilator public_flat_rd */,
     output wire O6 /* verilator public_flat_rd */
 `endif
   

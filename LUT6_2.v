@@ -18,12 +18,9 @@ module LUT6_2
     input  wire I0, I1, I2, I3, I4, I5,
 `ifdef FAST_IQ
     output wire O5,
-`else
-    output wire O5 /* verilator public_flat_rd */,
-`endif
-`ifdef FAST_IQ
     output wire O6
 `else
+    output wire O5 /* verilator public_flat_rd */,
     output wire O6 /* verilator public_flat_rd */
 `endif
 );

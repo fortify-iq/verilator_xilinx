@@ -24,16 +24,13 @@ module SRLC16E
     input  wire       A0, A1, A2, A3,
     // Data in
     input  wire       D,
+`ifdef FAST_IQ
     // Data out
-`ifdef FAST_IQ
     output wire       Q,
-`else
-    output wire       Q /* verilator public_flat_rd */,
-`endif
     // Cascading data out
-`ifdef FAST_IQ
     output wire       Q15
 `else
+    output wire       Q /* verilator public_flat_rd */,
     output wire       Q15 /* verilator public_flat_rd */,
 `endif
 );

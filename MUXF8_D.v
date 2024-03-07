@@ -16,12 +16,9 @@ module MUXF8_D
     input  wire S,
 `ifdef FAST_IQ
     output wire LO,
-`else
-    output wire LO /* verilator public_flat_rd */,
-`endif
-`ifdef FAST_IQ
     output wire O
 `else
+    output wire LO /* verilator public_flat_rd */,
     output wire O /* verilator public_flat_rd */
 `endif
 );
