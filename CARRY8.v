@@ -23,11 +23,19 @@ module CARRY8
     input  wire [7:0] DI,
     // Carry MUX select line
     input  wire [7:0] S,
+`ifdef FAST_IQ
     // Carry out of each stage of the chain
     output wire [7:0] CO,
     // Carry chain XOR general data out
     output wire [7:0] O
+`else
+    output wire [7:0] CO /* verilator public_flat_rd */,
+    output wire [7:0] O /* verilator public_flat_rd */
+`endif
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 1;
+`endif
     wire _w_CO0 = (S[0]) ?     CI : DI[0];
     wire _w_CO1 = (S[1]) ? _w_CO0 : DI[1];
     wire _w_CO2 = (S[2]) ? _w_CO1 : DI[2];

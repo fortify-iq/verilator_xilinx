@@ -133,9 +133,17 @@ module RAMB16BWER
     input  wire [13:0] ADDRB,       // Address
     input  wire  [3:0] DIPB,        // Parity in
     input  wire [31:0] DIB,         // Data in
+`ifdef FAST_IQ
     output wire  [3:0] DOPB,        // Parity out
     output wire [31:0] DOB          // Data out
+`else
+    output wire  [3:0] DOPB /* verilator public_flat_rd */,
+    output wire [31:0] DOB  /* verilator public_flat_rd */
+`endif
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 0;
+`endif
     
     // ========================================================================
     // Synchronous resets

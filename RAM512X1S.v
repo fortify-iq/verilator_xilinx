@@ -25,8 +25,15 @@ module RAM512X1S
     // Data in
     input  wire       D,
     // Data out
+`ifdef FAST_IQ
     output wire       O
+`else
+    output wire       O /* verilator_public_flat_rd */
+`endif
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 0;
+`endif
     // 512 x 1-bit Select RAM
     reg  [511:0] _r_mem;
     

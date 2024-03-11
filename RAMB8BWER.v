@@ -85,8 +85,13 @@ module RAMB8BWER
     input  wire [12:0] ADDRAWRADDR, // Address
     input  wire  [1:0] DIPADIP,     // Parity in
     input  wire [15:0] DIADI,       // Data in
+`ifdef FAST_IQ
     output wire  [1:0] DOPADOP,     // Parity out
     output wire [15:0] DOADO,       // Data out
+`else
+    output wire  [1:0] DOPADOP,     /* verilator public_flat_rd */
+    output wire [15:0] DOADO,       /* verilator public_flat_rd */
+`endif
     // Port B (TDP) / Read port (SDP)
     input  wire        RSTBRST,     // Reset
     input  wire        CLKBRDCLK,   // Clock
@@ -96,9 +101,17 @@ module RAMB8BWER
     input  wire [12:0] ADDRBRDADDR, // Address
     input  wire  [1:0] DIPBDIP,     // Parity in
     input  wire [15:0] DIBDI,       // Data in
+`ifdef FAST_IQ
     output wire  [1:0] DOPBDOP,     // Parity out
     output wire [15:0] DOBDO        // Data out
+`else
+    output wire  [1:0] DOPBDOP /* verilator public_flat_rd */,
+    output wire [15:0] DOBDO   /* verilator public_flat_rd */
+`endif
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 0;
+`endif
     
     // ========================================================================
     // Synchronous resets

@@ -60,20 +60,36 @@ module FIFO36E2
     input   [7:0] CASDINP,       // Cascade parity input
     input         CASDOMUX,      //
     input         CASDOMUXEN,    // NOT USED ?
+`ifdef FAST_IQ
     output [63:0] CASDOUT,       // Cascade data output
     output  [7:0] CASDOUTP,      // Cascade parity output
     output        CASNXTEMPTY,   // Cascade next empty
+`else
+    output [63:0] CASDOUT /* verilator public_flat_rd */,
+    output  [7:0] CASDOUTP /* verilator public_flat_rd */,
+    output        CASNXTEMPTY /* verilator public_flat_rd */,
+`endif
     input         CASNXTRDEN,    // Cascade next read enable
     input         CASOREGIMUX,   //
     input         CASOREGIMUXEN, // NOT USED ?
     input         CASPRVEMPTY,   // Cascade previous empty
+`ifdef FAST_IQ
     output        CASPRVRDEN,    // Cascade previous read enable
+`else
+    output        CASPRVRDEN /* verilator public_flat_rd */,
+`else
     // ECC signals
     input         INJECTDBITERR, // Inject double bit errors
     input         INJECTSBITERR, // Inject single bit error
+`ifdef FAST_IQ
     output  [7:0] ECCPARITY,
     output        DBITERR,
     output        SBITERR,
+`else
+    output  [7:0] ECCPARITY /* verilator public_flat_rd */,
+    output        DBITERR /* verilator public_flat_rd */,
+    output        SBITERR /* verilator public_flat_rd */,
+`endif
     // Reset and power-down
     input         RST,
     input         RSTREG,
@@ -82,6 +98,7 @@ module FIFO36E2
     input         RDCLK,
     input         RDEN,
     input         REGCE,
+`ifdef FAST_IQ
     // Read data
     output [63:0] DOUT,
     output  [7:0] DOUTP,
@@ -96,6 +113,20 @@ module FIFO36E2
     output [13:0] WRCOUNT,
     output        WRERR,
     output        WRRSTBUSY,
+`else
+    output [63:0] DOUT /* verilator public_flat_rd */,
+    output  [7:0] DOUTP /* verilator public_flat_rd */,
+    output        EMPTY /* verilator public_flat_rd */,
+    output        FULL /* verilator public_flat_rd */,
+    output        PROGEMPTY /* verilator public_flat_rd */,
+    output        PROGFULL /* verilator public_flat_rd */,
+    output [13:0] RDCOUNT /* verilator public_flat_rd */,
+    output        RDERR /* verilator public_flat_rd */,
+    output        RDRSTBUSY /* verilator public_flat_rd */,
+    output [13:0] WRCOUNT /* verilator public_flat_rd */,
+    output        WRERR /* verilator public_flat_rd */,
+    output        WRRSTBUSY /* verilator public_flat_rd */,
+`endif
     // Write control signals
     input         WRCLK,
     input         WREN,
@@ -103,6 +134,9 @@ module FIFO36E2
     input  [63:0] DIN,
     input   [7:0] DINP
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 0;
+`endif
     // ========================================================================
     // Local parameters
     // ========================================================================

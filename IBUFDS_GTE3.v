@@ -23,9 +23,17 @@ module IBUFDS_GTE3
     // Clock enable
     input      CEB,
     // Clock outputs
+`ifdef FAST_IQ
     output     O /* verilator clocker */,
     output reg ODIV2 /* verilator clocker */
+`else
+    output     O /* verilator clocker */ /* verilator public_flat_rd */, 
+    output reg ODIV2 /* verilator clocker */ /* verilator public_flat_rd */
+`endif
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 1;
+`endif
 
     reg r_IDIV2;
     

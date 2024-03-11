@@ -37,9 +37,17 @@ module RAM64X1D
     // Data in
     input  wire       D,
     // Data out
+`ifdef FAST_IQ
     output wire       SPO,
     output wire       DPO
+`else
+    output wire       SPO /* verilator public_flat_rd */,
+    output wire       DPO /* verilator public_flat_rd */
+`endif
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 0;
+`endif
     // Read / Write address
     wire  [5:0] _w_A    = { A5, A4, A3, A2, A1, A0 };
     // Read address

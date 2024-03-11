@@ -30,36 +30,71 @@ module RAM32M16
     // Port A
     input  wire [4:0] ADDRA,
     input  wire [1:0] DIA,
+`ifdef FAST_IQ
     output wire [1:0] DOA,
+`else
+    output wire [1:0] DOA /* verilator_public_flat_rd */,
+`endif
     // Port B
     input  wire [4:0] ADDRB,
     input  wire [1:0] DIB,
+`ifdef FAST_IQ
     output wire [1:0] DOB,
+`else
+    output wire [1:0] DOB /* verilator_public_flat_rd */,
+`endif
     // Port C
     input  wire [4:0] ADDRC,
     input  wire [1:0] DIC,
+`ifdef FAST_IQ
     output wire [1:0] DOC,
+`else
+    output wire [1:0] DOC /* verilator_public_flat_rd */,
+`endif
     // Port D
     input  wire [4:0] ADDRD,
     input  wire [1:0] DID,
+`ifdef FAST_IQ
     output wire [1:0] DOD,
+`else
+    output wire [1:0] DOD /* verilator_public_flat_rd */,
+`endif
     // Port E
     input  wire [4:0] ADDRE,
     input  wire [1:0] DIE,
+`ifdef FAST_IQ
     output wire [1:0] DOE,
+`else
+    output wire [1:0] DOE /* verilator_public_flat_rd */,
+`endif
     // Port F
     input  wire [4:0] ADDRF,
     input  wire [1:0] DIF,
+`ifdef FAST_IQ
     output wire [1:0] DOF,
+`else
+    output wire [1:0] DOF /* verilator_public_flat_rd */,
+`endif
     // Port G
     input  wire [4:0] ADDRG,
     input  wire [1:0] DIG,
+`ifdef FAST_IQ
     output wire [1:0] DOG,
+`else
+    output wire [1:0] DOG /* verilator_public_flat_rd */,
+`endif
     // Port H
     input  wire [4:0] ADDRH,
     input  wire [1:0] DIH,
+`ifdef FAST_IQ
     output wire [1:0] DOH
+`else
+    output wire [1:0] DOH /* verilator_public_flat_rd */
+`endif
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 0;
+`endif
     // 64 x 8-bit Select RAM
     reg [63:0] _r_mem_a;
     reg [63:0] _r_mem_b;

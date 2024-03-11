@@ -25,8 +25,15 @@ module BUFGCE_DIV
     input      I,
     input      CE,
     input      CLR,
+`ifdef FAST_IQ
     output reg O /* verilator clocker */
+`else
+    output reg O /* verilator clocker */ /* verilator public_flat_rd */
+`endif
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 1;
+`endif
 
     wire       w_CLK = I ^ IS_I_INVERTED;
     wire       w_CE;

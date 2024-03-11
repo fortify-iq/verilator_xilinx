@@ -205,6 +205,7 @@ module RAMB36E2
     parameter integer WRITE_WIDTH_B       = 0
 )
 (
+`ifdef FAST_IQ
     output wire [31:0] CASDOUTA,
     output wire [31:0] CASDOUTB,
     output wire  [3:0] CASDOUTPA,
@@ -219,6 +220,22 @@ module RAMB36E2
     output wire  [7:0] ECCPARITY,
     output wire  [8:0] RDADDRECC,
     output wire        SBITERR,
+`else
+    output wire [31:0] CASDOUTA /* verilator public_flat_rd */,
+    output wire [31:0] CASDOUTB /* verilator public_flat_rd */,
+    output wire  [3:0] CASDOUTPA /* verilator public_flat_rd */,
+    output wire  [3:0] CASDOUTPB /* verilator public_flat_rd */,
+    output wire        CASOUTDBITERR /* verilator public_flat_rd */,
+    output wire        CASOUTSBITERR /* verilator public_flat_rd */,
+    output wire        DBITERR /* verilator public_flat_rd */,
+    output wire [31:0] DOUTADOUT /* verilator public_flat_rd */,
+    output wire [31:0] DOUTBDOUT /* verilator public_flat_rd */,
+    output wire  [3:0] DOUTPADOUTP /* verilator public_flat_rd */,
+    output wire  [3:0] DOUTPBDOUTP /* verilator public_flat_rd */,
+    output wire  [7:0] ECCPARITY /* verilator public_flat_rd */,
+    output wire  [8:0] RDADDRECC /* verilator public_flat_rd */,
+    output wire        SBITERR /* verilator public_flat_rd */,
+`endif
     
     input wire  [14:0] ADDRARDADDR,
     input wire  [14:0] ADDRBWRADDR,
@@ -261,6 +278,9 @@ module RAMB36E2
     input wire   [3:0] WEA,
     input wire   [7:0] WEBWE
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 0;
+`endif
     // ========================================================================
     // Read / write helper functions
     // ========================================================================

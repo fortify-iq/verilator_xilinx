@@ -129,6 +129,7 @@ module RAMB18E2
     parameter integer WRITE_WIDTH_B       = 0
 )
 (
+`ifdef FAST_IQ
     output wire [15:0] CASDOUTA,
     output wire [15:0] CASDOUTB,
     output wire  [1:0] CASDOUTPA,
@@ -137,6 +138,16 @@ module RAMB18E2
     output wire [15:0] DOUTBDOUT,
     output wire  [1:0] DOUTPADOUTP,
     output wire  [1:0] DOUTPBDOUTP,
+`else
+    output wire [15:0] CASDOUTA /* verilator public_flat_rd */,
+    output wire [15:0] CASDOUTB /* verilator public_flat_rd */,
+    output wire  [1:0] CASDOUTPA /* verilator public_flat_rd */,
+    output wire  [1:0] CASDOUTPB /* verilator public_flat_rd */,
+    output wire [15:0] DOUTADOUT /* verilator public_flat_rd */,
+    output wire [15:0] DOUTBDOUT /* verilator public_flat_rd */,
+    output wire  [1:0] DOUTPADOUTP /* verilator public_flat_rd */,
+    output wire  [1:0] DOUTPBDOUTP /* verilator public_flat_rd */,
+`endif
     
     input wire  [13:0] ADDRARDADDR,
     input wire  [13:0] ADDRBWRADDR,
@@ -174,6 +185,9 @@ module RAMB18E2
     input wire   [1:0] WEA,
     input wire   [3:0] WEBWE
 );
+`ifdef SCOPE_IQ
+    localparam cell_kind /* verilator public_flat_rd */ = 0;
+`endif
     // ========================================================================
     // Read / write helper functions
     // ========================================================================
