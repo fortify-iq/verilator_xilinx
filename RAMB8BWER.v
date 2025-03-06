@@ -89,8 +89,8 @@ module RAMB8BWER
     output wire  [1:0] DOPADOP,     // Parity out
     output wire [15:0] DOADO,       // Data out
 `else
-    output wire  [1:0] DOPADOP,     /* verilator public_flat_rd */
-    output wire [15:0] DOADO,       /* verilator public_flat_rd */
+    output wire  [1:0] DOPADOP /* verilator public_flat_rd */,
+    output wire [15:0] DOADO   /* verilator public_flat_rd */,
 `endif
     // Port B (TDP) / Read port (SDP)
     input  wire        RSTBRST,     // Reset

@@ -31,7 +31,7 @@ module SRLC16E
     output wire       Q15
 `else
     output wire       Q /* verilator public_flat_rd */,
-    output wire       Q15 /* verilator public_flat_rd */,
+    output wire       Q15 /* verilator public_flat_rd */
 `endif
 );
 `ifdef SCOPE_OR_GLITCH_IQ
