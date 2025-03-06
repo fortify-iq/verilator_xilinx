@@ -12,15 +12,22 @@
 /* verilator coverage_off */
 module CARRY4
 (
+`ifdef GLITCH_IQ
     // Carry cascade input
-    input  wire       CI,
+    input  wire       CI /* verilator public_flat_rd */,
     // 
-    input  wire       CYINIT,
+    input  wire       CYINIT /* verilator public_flat_rd */,
     // Carry MUX data input
-    input  wire [3:0] DI,
+    input  wire [3:0] DI /* verilator public_flat_rd */,
     // Carry MUX select line
+    input  wire [3:0] S /* verilator public_flat_rd */,
+`else
+    input  wire       CI, 
+    input  wire       CYINIT,
+    input  wire [3:0] DI,
     input  wire [3:0] S,
-`ifdef FAST_IQ
+`endif
+`ifdef FAST_OR_GLITCH_IQ
     // Carry out of each stage of the chain
     output wire [3:0] CO,
     // Carry chain XOR general data out
@@ -30,7 +37,7 @@ module CARRY4
     output wire [3:0] O /* verilator public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 1;
 `endif
     wire _w_CO0 = S[0] ? CI | CYINIT : DI[0];

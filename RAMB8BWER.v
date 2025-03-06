@@ -85,7 +85,7 @@ module RAMB8BWER
     input  wire [12:0] ADDRAWRADDR, // Address
     input  wire  [1:0] DIPADIP,     // Parity in
     input  wire [15:0] DIADI,       // Data in
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire  [1:0] DOPADOP,     // Parity out
     output wire [15:0] DOADO,       // Data out
 `else
@@ -101,7 +101,7 @@ module RAMB8BWER
     input  wire [12:0] ADDRBRDADDR, // Address
     input  wire  [1:0] DIPBDIP,     // Parity in
     input  wire [15:0] DIBDI,       // Data in
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire  [1:0] DOPBDOP,     // Parity out
     output wire [15:0] DOBDO        // Data out
 `else
@@ -109,7 +109,7 @@ module RAMB8BWER
     output wire [15:0] DOBDO   /* verilator public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 0;
 `endif
     

@@ -17,13 +17,19 @@ module IBUFDS_GTE3
     parameter [1:0] REFCLK_ICNTL_RX    = 2'b00
 )
 (
+`ifdef GLITCH_IQ
     // Clock input
+    input      I /* verilator public_flat_rd */,
+    input      IB /* verilator public_flat_rd */,
+    // Clock enable
+    input      CEB /* verilator public_flat_rd */,
+`else
     input      I,
     input      IB,
-    // Clock enable
     input      CEB,
+`endif
     // Clock outputs
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output     O /* verilator clocker */,
     output reg ODIV2 /* verilator clocker */
 `else
@@ -31,7 +37,7 @@ module IBUFDS_GTE3
     output reg ODIV2 /* verilator clocker */ /* verilator public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 1;
 `endif
 

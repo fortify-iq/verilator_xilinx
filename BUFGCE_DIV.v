@@ -22,16 +22,22 @@ module BUFGCE_DIV
     parameter   [0:0] IS_I_INVERTED   = 1'b0
 )
 (
+`ifdef GLITCH_IQ
+    input      I /* verilator public_flat_rd */,
+    input      CE /* verilator public_flat_rd */,
+    input      CLR /* verilator public_flat_rd */,
+`else
     input      I,
     input      CE,
     input      CLR,
-`ifdef FAST_IQ
+`endif
+`ifdef FAST_OR_GLITCH_IQ
     output reg O /* verilator clocker */
 `else
     output reg O /* verilator clocker */ /* verilator public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 1;
 `endif
 

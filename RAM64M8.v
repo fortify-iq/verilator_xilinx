@@ -30,7 +30,7 @@ module RAM64M8
     // Port A
     input  wire [5:0] ADDRA,
     input  wire       DIA,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOA,
 `else
     output wire       DOA /* verilator_public_flat_rd */,
@@ -38,7 +38,7 @@ module RAM64M8
     // Port B
     input  wire [5:0] ADDRB,
     input  wire       DIB,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOB,
 `else
     output wire       DOB /* verilator_public_flat_rd */,
@@ -46,7 +46,7 @@ module RAM64M8
     // Port C
     input  wire [5:0] ADDRC,
     input  wire       DIC,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOC,
 `else
     output wire       DOC /* verilator_public_flat_rd */,
@@ -54,7 +54,7 @@ module RAM64M8
     // Port D
     input  wire [5:0] ADDRD,
     input  wire       DID,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOD,
 `else
     output wire       DOD /* verilator_public_flat_rd */,
@@ -62,7 +62,7 @@ module RAM64M8
     // Port E
     input  wire [5:0] ADDRE,
     input  wire       DIE,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOE,
 `else
     output wire       DOE /* verilator_public_flat_rd */,
@@ -70,7 +70,7 @@ module RAM64M8
     // Port F
     input  wire [5:0] ADDRF,
     input  wire       DIF,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOF,
 `else
     output wire       DOF /* verilator_public_flat_rd */,
@@ -78,7 +78,7 @@ module RAM64M8
     // Port G
     input  wire [5:0] ADDRG,
     input  wire       DIG,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOG,
 `else
     output wire       DOG /* verilator_public_flat_rd */,
@@ -86,13 +86,13 @@ module RAM64M8
     // Port H
     input  wire [5:0] ADDRH,
     input  wire       DIH,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOH
 `else
     output wire       DOH /* verilator_public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 0;
 `endif
     // 64 x 8-bit Select RAM

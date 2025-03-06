@@ -26,7 +26,7 @@ module RAM64M
     // Port A
     input  wire [5:0] ADDRA,
     input  wire       DIA,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOA,
 `else
     output wire       DOA /* verilator_public_flat_rd */,
@@ -34,7 +34,7 @@ module RAM64M
     // Port B
     input  wire [5:0] ADDRB,
     input  wire       DIB,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOB,
 `else
     output wire       DOB /* verilator_public_flat_rd */,
@@ -42,7 +42,7 @@ module RAM64M
     // Port C
     input  wire [5:0] ADDRC,
     input  wire       DIC,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOC,
 `else
     output wire       DOC /* verilator_public_flat_rd */,
@@ -50,13 +50,13 @@ module RAM64M
     // Port D
     input  wire [5:0] ADDRD,
     input  wire       DID,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire       DOD
 `else
     output wire       DOD /* verilator_public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 0;
 `endif
     // 64 x 4-bit Select RAM

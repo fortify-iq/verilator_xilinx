@@ -129,7 +129,7 @@ module RAMB18E2
     parameter integer WRITE_WIDTH_B       = 0
 )
 (
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire [15:0] CASDOUTA,
     output wire [15:0] CASDOUTB,
     output wire  [1:0] CASDOUTPA,
@@ -185,7 +185,7 @@ module RAMB18E2
     input wire   [1:0] WEA,
     input wire   [3:0] WEBWE
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 0;
 `endif
     // ========================================================================

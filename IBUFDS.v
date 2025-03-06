@@ -21,17 +21,22 @@ module IBUFDS
     parameter IOSTANDARD       = "DEFAULT"
 )
 (
+`ifdef GLITCH_IQ
     // Clock input
+    input  I /* verilator public_flat_rd */,
+    input  IB /* verilator public_flat_rd */,
+`else
     input  I,
     input  IB,
+`endif
     // Clock outputs
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output O /* verilator clocker */
 `else
     output O /* verilator clocker */ /* verilator public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 1;
 `endif
 

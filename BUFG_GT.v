@@ -12,20 +12,29 @@
 /* verilator coverage_off */
 module BUFG_GT
 (
+`ifdef GLITCH_IQ
+    input       I /* verilator public_flat_rd */,
+    input [2:0] DIV /* verilator public_flat_rd */,
+    input       CE /* verilator public_flat_rd */,
+    input       CEMASK /* verilator public_flat_rd */,
+    input       CLR /* verilator public_flat_rd */,
+    input       CLRMASK /* verilator public_flat_rd */,
+`else
     input       I,
     input [2:0] DIV,
     input       CE,
     input       CEMASK,
     input       CLR,
     input       CLRMASK,
+`endif
     
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output      O /* verilator clocker */
 `else
     output      O /* verilator clocker */ /* verilator public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 1;
 `endif
 

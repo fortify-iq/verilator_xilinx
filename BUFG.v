@@ -12,14 +12,18 @@
 /*verilator coverage_off*/
 module BUFG
 (
+`ifdef GLITCH_IQ
+    input  I /* verilator public_flat_rd */,
+`else
     input  I,
-`ifdef FAST_IQ
+`endif
+`ifdef FAST_OR_GLITCH_IQ
     output O /* verilator clocker */
 `else
     output O /* verilator clocker */ /* verilator public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 1;
 `endif
 

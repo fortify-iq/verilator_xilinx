@@ -15,14 +15,18 @@ module LUT2
     parameter [3:0] INIT = 4'b0000
 )
 (
+`ifdef GLITCH_IQ
+    input  wire I0 /* verilator public_flat_rd */, I1 /* verilator public_flat_rd */,
+`else
     input  wire I0, I1,
-`ifdef FAST_IQ
+`endif
+`ifdef FAST_OR_GLITCH_IQ
     output wire O
 `else
     output wire O /* verilator public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 1;
 `endif
     wire [1:0] _w_idx = { I1, I0 };

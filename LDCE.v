@@ -24,13 +24,13 @@ module LDCE
     // Data in
     input  wire D,
     // Data out
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output wire Q
 `else
     output wire Q /* verilator public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 0;
 `endif
     reg _r_Q;

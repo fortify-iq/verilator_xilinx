@@ -15,15 +15,22 @@ module CARRY8
     parameter CARRY_TYPE = "SINGLE_CY8" // "SINGLE_CY8", "DUAL_CY4"
 )
 (
+`ifdef GLITCH_IQ
     // Carry cascade input
-    input  wire       CI,
+    input  wire       CI /* verilator public_flat_rd */,
     // Second carry input (in DUAL_CY4 mode)
-    input  wire       CI_TOP,
+    input  wire       CI_TOP /* verilator public_flat_rd */,
     // Carry MUX data input
-    input  wire [7:0] DI,
+    input  wire [7:0] DI /* verilator public_flat_rd */,
     // Carry MUX select line
+    input  wire [7:0] S /* verilator public_flat_rd */,
+`else
+    input  wire       CI,
+    input  wire       CI_TOP,
+    input  wire [7:0] DI,
     input  wire [7:0] S,
-`ifdef FAST_IQ
+`endif
+`ifdef FAST_OR_GLITCH_IQ
     // Carry out of each stage of the chain
     output wire [7:0] CO,
     // Carry chain XOR general data out
@@ -33,7 +40,7 @@ module CARRY8
     output wire [7:0] O /* verilator public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 1;
 `endif
     wire _w_CO0 = (S[0]) ?     CI : DI[0];

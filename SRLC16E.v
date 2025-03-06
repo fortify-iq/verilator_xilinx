@@ -24,7 +24,7 @@ module SRLC16E
     input  wire       A0, A1, A2, A3,
     // Data in
     input  wire       D,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     // Data out
     output wire       Q,
     // Cascading data out
@@ -34,7 +34,7 @@ module SRLC16E
     output wire       Q15 /* verilator public_flat_rd */,
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 0;
 `endif
 

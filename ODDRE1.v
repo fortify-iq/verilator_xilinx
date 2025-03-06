@@ -23,13 +23,13 @@ module ODDRE1
     input  D1,
     input  D2,
     input  SR,
-`ifdef FAST_IQ
+`ifdef FAST_OR_GLITCH_IQ
     output Q
 `else
     output Q /* verilator public_flat_rd */
 `endif
 );
-`ifdef SCOPE_IQ
+`ifdef SCOPE_OR_GLITCH_IQ
     localparam cell_kind /* verilator public_flat_rd */ = 0;
 `endif
   
